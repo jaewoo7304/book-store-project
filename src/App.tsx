@@ -1,17 +1,18 @@
-import Home from './pages/Home';
-import Layout from './components/layout/Layout';
-import { ThemeProvider } from 'styled-components';
-import {dark, light} from "./style/theme";
-import { GlobalStyle } from './style/global';
+import { BookStoreThemeProvider } from "./context/themeContext";
+import { RouterProvider } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./api/queryClient";
+import { router } from "./router";
+import ToastContainer from "./components/common/toast/ToastContainer";
 
 function App() {
   return (
-    <ThemeProvider theme={dark}>
-      <GlobalStyle/>
-      <Layout>
-        <Home/>
-      </Layout>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <BookStoreThemeProvider>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </BookStoreThemeProvider>
+    </QueryClientProvider>
   );
 }
 

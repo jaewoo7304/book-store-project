@@ -1,13 +1,24 @@
 import "sanitize.css";
 import { createGlobalStyle } from "styled-components";
+import { ThemeName } from "./theme";
 
-export const GlobalStyle = createGlobalStyle`
-    body {
-        padding: 0;
-        margin: 0;
-    }
+interface Props {
+  themeName: ThemeName;
+}
 
-    h1 {
-        margin: 0;
-    }
+export const GlobalStyle = createGlobalStyle<Props>`
+  body {
+    padding: 0;
+    margin: 0;
+    background-color: ${(props) =>
+      props.themeName === "light" ? "white" : "black"};
+  }
+
+  h1 {
+    margin : 0;
+  }
+
+  * {
+    color: ${(props) => (props.themeName === "light" ? "black" : "white")}
+  }
 `;
